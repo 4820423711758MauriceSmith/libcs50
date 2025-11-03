@@ -477,6 +477,46 @@ static void teardown(void)
 #endif
 
 /**
+ * Frees a string allocated by get_string.
+ */
+void free_string(string s)
+{
+    // If string is NULL, do nothing
+    if (s == NULL)
+    {
+        return;
+    }
+
+    // Find the string in the array
+    for (size_t i = 0; i < allocations; i++)
+    {
+        if (strings[i] == s)
+        {
+            // Free the string
+            free(s);
+            
+            // Shift remaining elements to fill the gap
+            for (size_t j = i; j < allocations - 1; j++)
+            {
+                strings[j] = strings[j + 1];
+            }
+            
+            // Decrement allocation count
+            allocations--;
+            
+            // Resize the array
+            string *tmp = realloc(strings, sizeof (string) * allocations);
+            if (tmp != NULL || allocations == 0)
+            {
+                strings = tmp;
+            }
+            
+            return;
+        }
+    }
+}
+
+/**
  * Called automatically before execution enters main.
  */
 INITIALIZER(setup)

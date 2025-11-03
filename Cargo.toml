@@ -1,0 +1,15 @@
+[package]
+name = "cs50"
+version = "1.0.0"
+authors = ["CS50"]
+description = "CS50 library for Rust"
+license = "BSD-3-Clause"
+homepage = "https://github.com/cs50/libcs50"
+repository = "https://github.com/cs50/libcs50"
+
+[dependencies]
+libc = "0.2"
+
+[lib]
+name = "cs50"
+crate-type = ["cdylib", "rlib"]
