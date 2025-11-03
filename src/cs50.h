@@ -108,4 +108,9 @@ long long get_long_long(const char *format, ...) __attribute__((format(printf, 1
 string get_string(va_list *args, const char *format, ...) __attribute__((format(printf, 2, 3)));
 #define get_string(...) get_string(NULL, __VA_ARGS__)
 
+/**
+ * Frees a string allocated by get_string.
+ */
+void free_string(string s);
+
 #endif
